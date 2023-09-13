@@ -1,9 +1,9 @@
-import { getTodayDateFormat } from './time';
+import { getDateFormat } from './time';
 
-export const createDonatItem = (donate) => {
+export const createDonateItem = (donate) => {
   const donateItem = document.createElement('div');
   donateItem.className = 'donate-item';
-  donateItem.innerHTML = `${getTodayDateFormat(donate.date)} am - <b>${
+  donateItem.innerHTML = `${getDateFormat(donate.date)} am - <b>${
     donate.amount
   }$</b>`;
 

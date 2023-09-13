@@ -13,6 +13,20 @@ export class DonateForm {
     this.totalAmountHTML.textContent = `${newAmount}$`;
   }
 
+  #handlerSubmitForm(e) {
+    e.preventDefault();
+    const donateInputValue = Number(e.target.amount.value);
+    if (!donateInputValue) {
+      return;
+    }
+    const newDonate = {
+      date: new Date(),
+      amount: donateInputValue,
+    };
+    this.#createNewDonate(newDonate);
+    e.target.amount.value = '';
+  }
+
   render() {
     this.#donateForm.className = 'donate-form';
     this.#donateForm.innerHTML = `
@@ -35,17 +49,10 @@ export class DonateForm {
     this.#donateForm.prepend(this.totalAmountHTML);
     this.updateTotalAmount(this.#totalAmount);
 
-    this.#donateForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const newDonate = {
-        date: new Date(),
-        amount: Number(
-          document.querySelector('.donate-form__donate-input').value
-        ),
-      };
-      this.#createNewDonate(newDonate);
-      document.querySelector('.donate-form__donate-input').value = '';
-    });
+    this.#donateForm.addEventListener(
+      'submit',
+      this.#handlerSubmitForm.bind(this)
+    );
 
     return this.#donateForm;
   }

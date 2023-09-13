@@ -1,4 +1,4 @@
-import { createDonatItem } from '../core/utils/donate-items';
+import { createDonateItem } from '../core/utils/donate-items';
 
 export class DonateList {
   #donates;
@@ -13,7 +13,7 @@ export class DonateList {
   #renderDonates(container) {
     container.innerHTML = '';
     this.#donates.forEach((donate) => {
-      const donatItem = createDonatItem(donate);
+      const donatItem = createDonateItem(donate);
       container.append(donatItem);
     });
   }
